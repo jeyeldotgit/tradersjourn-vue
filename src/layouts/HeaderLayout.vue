@@ -1,42 +1,57 @@
+<!-- src/layouts/HeaderLayout.vue -->
 <template>
-  <div class="min-h-screen flex flex-col">
-    <!-- Header -->
-    <header
-      class="bg-light-card text-gray-900 p-6 shadow-md border-primary/30 sticky top-0 z-50 flex justify-between items-center"
+  <header
+    class="flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-800 shadow-md"
+  >
+    <!-- Mobile Sidebar Toggle -->
+    <button
+      @click="$emit('toggle-sidebar')"
+      class="md:hidden text-gray-700 dark:text-gray-300"
     >
-      <!-- Left Side of the Header -->
-      <div>
-        <h1
-          class="text-3xl font-extrabold text-light-text tracking-wide text-primary"
-        >
-          TradersJourn
-        </h1>
-      </div>
+      <i class="pi pi-bars text-xl" />
+    </button>
 
-      <!-- Right Side of the Header -->
-      <div class="flex items-center gap-4">
-        <p class="text-lg">{{ user }}</p>
-        <Avatar :image="avatar" class="mr-2" size="medium" shape="circle" />
-      </div>
-    </header>
+    <h1 class="text-lg font-semibold text-gray-800 dark:text-white">
+      {{ headerTitle }}
+    </h1>
 
-    <!-- Main Content Slot -->
-    <main class="flex-1 bg-light-bg">
-      <RouterView />
-    </main>
-  </div>
+    <!-- Avatar Right -->
+    <div class="flex items-center gap-3">
+      <span class="text-sm text-gray-700 dark:text-gray-300">
+        {{ username }}
+      </span>
+      <img
+        src="../assets/avatar.jpg"
+        alt="User avatar"
+        class="w-8 h-8 rounded-full object-cover"
+      />
+    </div>
+  </header>
 </template>
 
 <script setup>
-import { RouterView } from "vue-router";
-import { ref } from "vue";
-import "primeicons/primeicons.css";
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 
-import avatar from "../assets/avatar.jpg";
+const route = useRoute();
 
-const user = ref("sedd.gg");
+const currentPage = computed(() => {
+  const segments = route.path.split("/");
+  return segments[segments.length - 1]; // 'dashboard'
+});
 
-// wehn store is available, we can use it to manage state
-// get user data from store
-// at the other end of header we can create a person button that will show edit profile, logout, etc
+const headerTitle = computed(() => {
+  switch (currentPage.value) {
+    case "dashboard":
+      return "Dashboard";
+    case "settings":
+      return "Settings";
+    case "profile":
+      return "Profile";
+    default:
+      return "TradersJourn";
+  }
+});
+
+const username = ref("trader123");
 </script>

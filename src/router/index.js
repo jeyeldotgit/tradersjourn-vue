@@ -8,11 +8,10 @@ import SignupView from "../views/public/SignupView.vue";
 // Private Routes or Views (Authenticated)
 import HomeView from "../views/private/HomeView.vue";
 // Private Route -- Selected Account Views
-import DashboardView from "../components/private/AccountView/DashboardView.vue";
+import DashboardView from "../views/private/DashboardView.vue";
 
 // Layouts for authenticated routes
-import HeaderLayout from "../layouts/HeaderLayout.vue";
-import SidebarLayout from "../layouts/SidebarLayout.vue";
+import AppLayout from "../layouts/AppLayout.vue";
 
 const routes = [
   { path: "/", component: LandingView },
@@ -22,29 +21,18 @@ const routes = [
   // Accounst Routes
   {
     path: "/accounts",
-    component: HeaderLayout,
-    children: [
-      {
-        path: "",
-        component: HomeView,
-      },
-    ],
+    component: HomeView,
   },
 
   // Selected Account Routes
   {
     path: "/:accountId",
-    component: HeaderLayout,
+    component: AppLayout,
     children: [
       {
-        path: "",
-        component: SidebarLayout,
-        children: [
-          {
-            path: "dashboard",
-            component: DashboardView,
-          },
-        ],
+        path: "dashboard",
+        component: DashboardView,
+        meta: { title: "Dashboard" },
       },
     ],
   },
