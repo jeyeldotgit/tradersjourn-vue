@@ -1,8 +1,8 @@
 <template>
-  <div class="card shadow-lg rounded-lg p-6 bg-white dark:bg-gray-800">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-      Trade History
-    </h2>
+  <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+    Trade History
+  </h2>
+  <div class="card">
     <DataTable :value="trades" tableStyle="min-width: 50rem">
       <Column field="id" header="Trade ID" />
       <Column field="asset" header="Asset" />
@@ -60,6 +60,7 @@ onMounted(() => {
 
 <style scoped>
 .card {
+  width: 100%;
   border: 1px solid #e5e7eb;
 }
 </style>

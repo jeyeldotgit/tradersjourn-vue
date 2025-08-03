@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full w-full p-4 lg:p-6 gap-6">
     <!-- Top Part: Metrics Cards -->
-    <div class="flex flex-col gap-4 lg:flex-row lg:items-stretch">
+    <div class="flex flex-col gap-4 lg:flex-row">
       <div class="flex-1">
         <BalanceCard :balance="balanceData" />
       </div>
@@ -17,19 +17,21 @@
     </div>
 
     <!-- Bottom Part: Performance Overview -->
-    <div>
-      <h2 class="text-xl font-semibold mb-4">Performance Overview</h2>
-      <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
-        <PerformanceLineGraph />
+    <!-- <div class="flex flex-col gap-4">
+      <div class="flex-1">
+        <h2 class="text-xl font-semibold mb-4">Performance Overview</h2>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+          <PerformanceLineGraph />
+        </div>
       </div>
+    </div> -->
+
+    <div class="w-full overflow-auto">
+      <PerformanceLineGraph />
+      <TradesTable />
     </div>
 
     <!-- Trades Table -->
-    <div>
-      <h2 class="text-xl font-semibold mb-4">Recent Trades</h2>
-
-      <TradesTable />
-    </div>
   </div>
 </template>
 

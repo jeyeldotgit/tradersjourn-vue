@@ -1,11 +1,11 @@
-<!-- src/layouts/AppLayout.vue -->
 <template>
-  <div class="flex h-screen bg-gray-100 dark:bg-gray-900">
+  <div class="flex h-screen w-full bg-gray-100 dark:bg-gray-900">
     <!-- Sidebar -->
     <SidebarLayout v-if="isSidebarVisible" />
 
     <!-- Main Content -->
-    <div class="flex-1 flex flex-col">
+    <div class="flex-1 flex flex-col min-w-0">
+      <!-- 💡 Important: min-w-0 prevents overflow in flex child -->
       <!-- Header -->
       <HeaderLayout @toggle-sidebar="toggleSidebar" />
 
@@ -18,12 +18,11 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import SidebarLayout from "./SidebarLayout.vue";
 import HeaderLayout from "./HeaderLayout.vue";
 
 const isSidebarVisible = ref(true);
-
 function toggleSidebar() {
   isSidebarVisible.value = !isSidebarVisible.value;
 }

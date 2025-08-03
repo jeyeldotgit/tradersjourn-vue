@@ -4,13 +4,13 @@
       type="line"
       :data="chartData"
       :options="chartOptions"
-      class="h-[30rem]"
+      class="h-[30rem] w-full"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 onMounted(() => {
   chartData.value = setChartData();
@@ -54,6 +54,7 @@ const setChartOptions = () => {
   );
 
   return {
+    responsive: true,
     maintainAspectRatio: false,
     aspectRatio: 0.6,
     plugins: {
@@ -84,3 +85,10 @@ const setChartOptions = () => {
   };
 };
 </script>
+
+<style scoped>
+.card {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+}
+</style>
